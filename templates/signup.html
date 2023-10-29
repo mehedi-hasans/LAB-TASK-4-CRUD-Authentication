@@ -11,10 +11,11 @@
     <div class="container bg-success-subtle p-5  rounded  mt-5 ">
       <h1 class="text-center ">Register Please</h1>
       <form class="form mt-5 w-75 m-auto " action="" method="POST">
-        <input class="form-control form-control-lg" type="text" placeholder="Name" name="name"> <br>
-        <input class="form-control form-control-lg" type="text" placeholder="Email" name="email"><br>
-        <input class="form-control form-control-lg" type="text" placeholder="Password" name="password"><br>
-        <input class="form-control form-control-lg" type="text" placeholder="Confirm Password" name="confirmpassword"><br>
+        {% csrf_token %}
+        <input class="form-control form-control-lg" type="text" placeholder="Name" name="username"> <br>
+        <input class="form-control form-control-lg" type="email" placeholder="Email" name="email"><br>
+        <input class="form-control form-control-lg" type="password" placeholder="Password" name="password"><br>
+        <input class="form-control form-control-lg" type="password" placeholder="Confirm Password" name="confirmpassword"><br>
         <button class="btn btn-success  btn-block form-control-lg " type="submit">Register</button>
       </form>
       <div class="text-center ">Already have an account? <a href=" {% url 'loginPage' %} ">Login</a></div>
