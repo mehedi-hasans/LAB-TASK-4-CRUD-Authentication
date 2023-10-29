@@ -15,8 +15,8 @@ def signupPage(request):
         
         else:
             myuser=User.objects.create_user(uname,email,pass1)
-        myuser.save()
-        return redirect('loginPage')
+            myuser.save()
+            return redirect('loginPage')
 
     return render(request, 'signup.html')
 
@@ -59,8 +59,8 @@ def addUser(request):
         
         else:
             myuser=User.objects.create_user(uname,email,pass1)
-        myuser.save()
-        return redirect('index')
+            myuser.save()
+            return redirect('index')
     
     return render(request, 'addUser.html')
 
@@ -71,3 +71,54 @@ def deleteUser(request,id):
     return redirect("index")
 
 
+# def updatePage(request, id):
+    user=User.objects.get(id=id)
+    context={
+        'user': user
+    }
+    if request.method == "POST":
+        username = request.POST.get('username')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+
+        update= User(
+            id = id,
+            username = username,
+            first_name = fname,
+            last_name=lname,
+            email = email 
+        )
+
+        update.save()
+        return redirect("index")
+    
+    return render(request, "update.html", context)
+
+
+def updatePage(request, id):
+    # Retrieve the user based on the provided ID
+    user = User.objects.get(id=id)
+    
+    if request.method == "POST":
+        # Get updated data from the form
+        username = request.POST.get('username')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+
+        # Update the user's fields
+        user.username = username
+        user.first_name = fname
+        user.last_name = lname
+        user.email = email
+
+        # Save the changes
+        user.save()
+        
+        return redirect('index')
+    
+    context = {
+        'user': user
+    }
+    return render(request, "update.html", context)
