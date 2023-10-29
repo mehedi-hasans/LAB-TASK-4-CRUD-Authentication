@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 def signupPage(request):
     if request.method=='POST':
@@ -21,8 +22,18 @@ def signupPage(request):
 
 
 
-
 def loginPage(request):
+    if request.method=='POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
+        
+        if user!=None:
+            login(request,user)
+            return redirect("index")
+        else:
+            return HttpResponse("username not found")
+        
     return render(request, 'login.html')
 
 def index(request):

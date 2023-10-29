@@ -11,6 +11,7 @@
     <div class="container bg-success-subtle p-5  rounded  mt-5 ">
       <h1 class="text-center ">Login Please</h1>
       <form class="form mt-5 w-75 m-auto " action="" method="POST">
+        {% csrf_token %}
         <input class="form-control  form-control-lg" name="username" type="text" placeholder="username"><br>
         <input class="form-control  form-control-lg"  name="password" type="password" placeholder="Password"><br>
         <button class="btn btn-success  btn-block form-control-lg " type="submit">Log in</button>
