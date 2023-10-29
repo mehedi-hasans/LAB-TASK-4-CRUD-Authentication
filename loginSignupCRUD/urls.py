@@ -8,4 +8,5 @@ urlpatterns = [
     path('loginPage/', views.loginPage, name='loginPage'),
     path('index/', views.index, name='index'),
     path('addUser/', views.addUser, name='addUser'),
+    path('deleteUser/<str:id>', views.deleteUser, name='deleteUser'),
 ]

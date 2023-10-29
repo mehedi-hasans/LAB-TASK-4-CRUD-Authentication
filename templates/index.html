@@ -53,7 +53,10 @@
             <td>{{ u.username }}</td>
             <td>{{ u.phone }}</td>
             <td><img src="" alt=" "></td> 
-            <td><button class="btn-success btn m-2 ">Edit</button><button class="btn-danger btn">Delete</button></td>
+            <td><button class="btn-success btn m-2 ">Edit</button>
+              <a href="{% url 'deleteUser' u.id %}">
+                <button class="btn btn-danger">Delete</button>
+              </a>
           </tr>
         {% endfor %}
         

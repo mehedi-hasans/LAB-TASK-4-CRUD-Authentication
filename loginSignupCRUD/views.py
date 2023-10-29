@@ -47,6 +47,7 @@ def index(request):
 
 
 def addUser(request):
+    
     if request.method=='POST':
         uname=request.POST.get('username')
         email=request.POST.get('email')
@@ -62,3 +63,11 @@ def addUser(request):
         return redirect('index')
     
     return render(request, 'addUser.html')
+
+
+def deleteUser(request,id):
+    user=User.objects.filter(id=id)
+    user.delete()
+    return redirect("index")
+
+
