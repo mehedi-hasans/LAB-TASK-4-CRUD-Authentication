@@ -27,7 +27,6 @@ def loginPage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user=authenticate(request,username=username,password=password)
-        
         if user!=None:
             login(request,user)
             return redirect("index")
@@ -37,4 +36,29 @@ def loginPage(request):
     return render(request, 'login.html')
 
 def index(request):
-    return render(request, 'index.html')
+    # user=request.user
+    # userdata=user.objects.all()
+    users = User.objects.all()
+    context={
+         'user':users   
+    }
+    return render(request, 'index.html', context)
+
+
+
+def addUser(request):
+    if request.method=='POST':
+        uname=request.POST.get('username')
+        email=request.POST.get('email')
+        pass1=request.POST.get('password')
+        pass2=request.POST.get('confirmpassword')
+
+        if pass1!=pass2:
+            return HttpResponse('Not Match')
+        
+        else:
+            myuser=User.objects.create_user(uname,email,pass1)
+        myuser.save()
+        return redirect('index')
+    
+    return render(request, 'addUser.html')
