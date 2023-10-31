@@ -36,8 +36,6 @@ def loginPage(request):
     return render(request, 'login.html')
 
 def index(request):
-    # user=request.user
-    # userdata=user.objects.all()
     users = User.objects.all()
     context={
          'user':users   
@@ -71,29 +69,6 @@ def deleteUser(request,id):
     return redirect("index")
 
 
-# def updatePage(request, id):
-    user=User.objects.get(id=id)
-    context={
-        'user': user
-    }
-    if request.method == "POST":
-        username = request.POST.get('username')
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
-        email = request.POST.get('email')
-
-        update= User(
-            id = id,
-            username = username,
-            first_name = fname,
-            last_name=lname,
-            email = email 
-        )
-
-        update.save()
-        return redirect("index")
-    
-    return render(request, "update.html", context)
 
 
 def updatePage(request, id):
